@@ -1,24 +1,20 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
+import vue from '@vitejs/plugin-vue';
 
 export default defineConfig({
-    // This part for homestead
-    server: {
-        hmr: {
-            host: "192.168.56.56",
-        },
-        host: "192.168.56.56",
-        watch: {
-            usePolling: true,
-        },
-    },
     plugins: [
         laravel({
-            input: [
-                'resources/css/app.css',
-                'resources/js/app.js',
-            ],
+            input: 'resources/js/app.js',
             refresh: true,
+        }),
+        vue({
+            template: {
+                transformAssetUrls: {
+                    base: null,
+                    includeAbsolute: false,
+                },
+            },
         }),
     ],
 });
